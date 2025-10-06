@@ -137,6 +137,13 @@ namespace String1125_2025
                 result += word[i]; // в каждой итерации создается новая строка и засоряет собой память
             Console.WriteLine(result);
 
+            // вариант чуть лучше
+            StringBuilder sbResult = new();
+            for (int i = m; i <= n; i++)
+                sbResult.Append(word[i]); // в каждой итерации создается новая строка и засоряет собой память
+            result = sbResult.ToString();
+            Console.WriteLine(result);
+
             // StringBuilder нужен для задач,
             // когда требуется собирать строку из множества
             // подстрок
