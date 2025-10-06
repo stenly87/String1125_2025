@@ -122,7 +122,7 @@ namespace String1125_2025
                 m >= word.Length ||
                 m >= n ||
                 n >= word.Length)
-            { 
+            {
                 Console.WriteLine("до свидания");
                 return;
             }
@@ -156,6 +156,25 @@ namespace String1125_2025
                 sb.Append(i);
             // получение итоговой строки
             result = sb.ToString();
+
+
+            /*12.22.	 Из  слова  яблоко  путем
+             * «вырезок»  и  «склеек»  его  букв 
+            получить слова блок и око
+            */
+            word = "яблоко";
+            string s1 = word.Substring(1, 4);
+            string s2 = word.Substring(3, 3);
+            // вывод интерполированной строки
+            Console.WriteLine($"{s1} {s2}");
+
+            // в последних версиях языка можно 
+            // создавать многострочные литералы
+            word = """
+                Многострочный текст
+                Почти как pre в html
+                """;
+            Console.WriteLine($"{word}");
         }
     }
 }
