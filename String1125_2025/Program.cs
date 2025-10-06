@@ -1,4 +1,6 @@
-﻿namespace String1125_2025
+﻿using System.Text;
+
+namespace String1125_2025
 {
     internal class Program
     {
@@ -29,7 +31,7 @@
             Console.WriteLine(newText);
             Console.WriteLine(text);
 
-            for(int i = 0; i < 1000; i++)
+            for (int i = 0; i < 1000; i++)
                 newText = "первая " + "вторая " + "третья " + "строка";
 
             //"первая вторая "
@@ -88,7 +90,7 @@
             // разделение строки на массив подстрок, используя
             // указанные разделители (по умолчанию пробел)
             string[] array = text.Split();
-            char[] splitters = new char[] { ' ', ',', '.'};
+            char[] splitters = new char[] { ' ', ',', '.' };
             // разделить строку с помощью пробелов, запятых и точек
             array = text.Split(splitters);
             // выделение подстроки, начиная с заданного индекса (0)
@@ -103,7 +105,50 @@
 
             //строки хранят текст в utf-16 (но бывают исключения)
             //по 2 байта на символ
-           
+
+            // 12.21
+            /* Дано слово. Получить его часть, образованную идущими 
+            подряд буквами, начиная с m-й и заканчивая n-й
+            */
+            string word = Console.ReadLine();
+            Console.Write("m - ");
+            int.TryParse(Console.ReadLine(), out int m);
+            Console.Write("n - ");
+            int.TryParse(Console.ReadLine(), out int n);
+
+            // т.к. строка это массив, при попытке получить значение
+            // по несуществующему индексу мы получим исключение (программа грохнется)
+            if (m < 0 ||
+                m >= word.Length ||
+                m >= n ||
+                n >= word.Length)
+            { 
+                Console.WriteLine("до свидания");
+                return;
+            }
+            // через метод Substring
+            int lastIndex = n - m + (m > 0 ? 1 : 0);
+            string result = word.Substring(m, lastIndex);
+            Console.WriteLine(result);
+
+            // второй вариант (плохой)
+            result = "";
+            for (int i = m; i <= n; i++)
+                result += word[i]; // в каждой итерации создается новая строка и засоряет собой память
+            Console.WriteLine(result);
+
+            // StringBuilder нужен для задач,
+            // когда требуется собирать строку из множества
+            // подстрок
+            // StringBuilder не создает промежуточные строки
+            // он работает с массивом символов, который может увеличиваться
+            StringBuilder sb = new StringBuilder(2000);
+            sb.Append(10);
+            sb.AppendLine("текст").Append('ы');
+            for (int i = 0; i < 5; i++)
+                sb.Append(i);
+            // получение итоговой строки
+            result = sb.ToString();
         }
     }
 }
